@@ -29,9 +29,10 @@ class RedisPlusPlusConan(ConanFile):
     )
 
     def source(self):
-        tools.get("{0}/archive/{1}.tar.gz".format(self.homepage, self.version))
-        extracted_dir = self.name + "-" + self.version
-        os.rename(extracted_dir, self.source_subfolder)
+        #tools.get("{0}/archive/{1}.tar.gz".format(self.homepage, self.version))
+        #extracted_dir = self.name + "-" + self.version
+        #os.rename(extracted_dir, self.source_subfolder)
+        self.run("git clone https://github.com/sewenew/redis-plus-plus "+self.source_subfolder)
         self.run("find . -name CMakeLists.txt | while read line;do sed -i '/add_subdirectory(test)/d' $line;done")
 
     def requirements(self):
